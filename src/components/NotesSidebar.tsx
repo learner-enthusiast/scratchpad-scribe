@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { PlusCircle, Search } from 'lucide-react';
 import { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { ThemeToggle } from "@/components/theme/themeToggle";
 
 interface NotesSidebarProps {
   notes: Note[];
@@ -32,9 +33,12 @@ export function NotesSidebar({
       <div className="p-4 border-b space-y-3">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-foreground">Notes</h1>
-          <Button onClick={onCreateNote} size="icon" variant="default">
-            <PlusCircle className="h-5 w-5" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle/>
+            <Button onClick={onCreateNote} size="icon" variant="default">
+              <PlusCircle className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
