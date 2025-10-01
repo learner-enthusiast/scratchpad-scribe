@@ -44,7 +44,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: build-files-${{ github.sha }}
+        name: build-files-${{ matrix.node-version }}-${{ github.sha }}
         path: dist/
         retention-days: 7
         
