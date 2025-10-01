@@ -47,7 +47,7 @@ export function NoteEditor({ note, onUpdate, onDelete }: NoteEditorProps) {
         <Input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="text-2xl font-semibold border-none shadow-none focus-visible:ring-0 px-0"
+          className="text-2xl font-semibold font-serif border-none shadow-none focus-visible:ring-0 px-0"
           placeholder="Note title..."
         />
         <AlertDialog>

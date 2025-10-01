@@ -28,7 +28,7 @@ export function NotesSidebar({
   );
 
   return (
-    <div className="w-80 border-r bg-secondary/30 flex flex-col h-screen">
+    <div className="w-screen md:w-80 border-r bg-secondary/30 flex flex-col h-screen">
       <div className="p-4 border-b space-y-3">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-foreground">Notes</h1>
