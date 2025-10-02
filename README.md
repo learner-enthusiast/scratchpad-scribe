@@ -47,4 +47,4 @@ This project is built with:
 Looking for real-time support, merge help, or just want to chat with other contributors?  
 Come hang out with us on **Discord** and get connected instantly!
 
-[![Join Our Discord](https://img.shields.io/badge/Discord-Join%Server-5865F2?logo=discord&logoColor=white&style=for-the-badge)](https://discord.com/invite/Yn9g6KuWyA)
+[![Join Our Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?logo=discord&logoColor=white&style=for-the-badge)](https://discord.com/invite/Yn9g6KuWyA)
