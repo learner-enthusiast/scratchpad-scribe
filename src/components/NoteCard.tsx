@@ -1,6 +1,6 @@
-import { Note } from '@/types/note';
+import { Note, formatTimestamp, getRelativeTime } from '@/types/note';
 import { Card } from '@/components/ui/card';
-import { formatDistanceToNow } from 'date-fns';
+import { Calendar, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
 import {
@@ -36,10 +36,19 @@ export function NoteCard({ note, isActive, onClick, onDelete }: NoteCardProps) {
         <h3 className="font-semibold text-foreground mb-1 truncate font-serif">
           {note.title || 'Untitled Note'}
         </h3>
-        <p className="text-xs text-muted-foreground font-sans">
-          {formatDistanceToNow(note.updatedAt, { addSuffix: true })}
-        </p>
-      </div>
+        
+        {/* Timestamp Display */}
+        <div className="flex flex-col gap-1 pt-2 border-t border-border/50">
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Calendar className="w-3 h-3" />
+            <span>Created: {formatTimestamp(note.createdAt)}</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Clock className="w-3 h-3" />
+            <span>Edited {getRelativeTime(note.updatedAt)}</span>
+          </div>
+        </div>
+        </div>
 
       <div className="flex justify-center items-center">
         <AlertDialog>
