@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useNotes } from '@/hooks/useNotes';
-import { NotesSidebar } from '@/components/NotesSidebar';
-import { NoteEditor } from '@/components/NoteEditor';
-import { FileText, ArrowLeft } from 'lucide-react';
-import { toast } from 'sonner';
+import { useState, useEffect } from "react";
+import { useNotes } from "@/hooks/useNotes";
+import { NotesSidebar } from "@/components/NotesSidebar";
+import { NoteEditor } from "@/components/NoteEditor";
+import { FileText, ArrowLeft } from "lucide-react";
+import { toast } from "sonner";
 
 const Index = () => {
   const { notes, createNote, updateNote, deleteNote } = useNotes();
@@ -29,19 +29,19 @@ const Index = () => {
     }
   };
 
-  const navigateNotes = (direction: 'up' | 'down') => {
+  const navigateNotes = (direction: "up" | "down") => {
     if (notes.length === 0) return;
 
     const currentIndex = notes.findIndex((note) => note.id === activeNoteId);
-    
+
     if (currentIndex === -1) {
       setActiveNoteId(notes[0].id);
       return;
     }
 
-    if (direction === 'up' && currentIndex > 0) {
+    if (direction === "up" && currentIndex > 0) {
       setActiveNoteId(notes[currentIndex - 1].id);
-    } else if (direction === 'down' && currentIndex < notes.length - 1) {
+    } else if (direction === "down" && currentIndex < notes.length - 1) {
       setActiveNoteId(notes[currentIndex + 1].id);
     }
   };
@@ -51,44 +51,44 @@ const Index = () => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.ctrlKey || event.metaKey) {
         const key = event.key.toLowerCase();
-        
+
         switch (key) {
-          case 'k': // Ctrl+K for new note
+          case "k": // Ctrl+K for new note
             event.preventDefault();
             event.stopPropagation();
             handleCreateNote();
-            toast.success('New note created');
+            toast.success("New note created");
             break;
-          case 's':
+          case "s":
             event.preventDefault();
             event.stopPropagation();
             const currentNote = notes.find((note) => note.id === activeNoteId);
             if (currentNote) {
-              toast.success('Note saved automatically');
+              toast.success("Notes are saved automatically");
             }
             break;
-          case 'd':
+          case "d":
             event.preventDefault();
             event.stopPropagation();
             if (activeNoteId) {
               handleDeleteNote(activeNoteId);
-              toast.success('Note deleted');
+              toast.success("Note deleted");
             }
             break;
-          case 'f':
+          case "f":
             event.preventDefault();
             event.stopPropagation();
-            window.dispatchEvent(new CustomEvent('focus-search'));
+            window.dispatchEvent(new CustomEvent("focus-search"));
             break;
-          case 'arrowup':
+          case "arrowup":
             event.preventDefault();
             event.stopPropagation();
-            navigateNotes('up');
+            navigateNotes("up");
             break;
-          case 'arrowdown':
+          case "arrowdown":
             event.preventDefault();
             event.stopPropagation();
-            navigateNotes('down');
+            navigateNotes("down");
             break;
         }
       }
@@ -115,25 +115,37 @@ const Index = () => {
           />
           <main className="flex-1 overflow-hidden relative">
             {/* Keyboard Shortcuts Helper */}
-            <div className="absolute bottom-4 right-4 bg-card border border-border rounded-lg p-3 shadow-lg text-xs z-10">
-              <div className="font-semibold text-foreground mb-2 text-sm">Keyboard Shortcuts</div>
+            <div
+              className="absolute bottom-4 right-4 bg-card border border-border rounded-lg p-3 shadow-lg text-xs z-10"
+              role="region"
+              aria-labelledby="shortcuts-heading"
+            >
+              <div id="shortcuts-heading" className="font-semibold text-foreground mb-2 text-sm">Keyboard Shortcuts</div>
               <div className="space-y-1 text-muted-foreground">
                 <div className="flex items-center justify-between gap-4">
                   <span>New note</span>
-                  <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">Ctrl+K</kbd>
+                  <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">
+                    Ctrl+K
+                  </kbd>
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <span>Save note</span>
-                  <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">Ctrl+S</kbd>
+                  <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">
+                    Ctrl+S
+                  </kbd>
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <span>Delete note</span>
-                  <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">Ctrl+D</kbd>
+                  <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">
+                    Ctrl+D
+                  </kbd>
                 </div>
-                
+
                 <div className="flex items-center justify-between gap-4">
                   <span>Navigate</span>
-                  <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">Ctrl+↑↓</kbd>
+                  <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">
+                    Ctrl+↑↓
+                  </kbd>
                 </div>
               </div>
             </div>
@@ -149,7 +161,9 @@ const Index = () => {
             ) : (
               <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
                 <FileText className="h-24 w-24 mb-4 opacity-20" />
-                <p className="text-xl">Select a note or create a new one to get started</p>
+                <p className="text-xl">
+                  Select a note or create a new one to get started
+                </p>
               </div>
             )}
           </main>
