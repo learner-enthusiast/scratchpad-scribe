@@ -53,13 +53,14 @@ const Index = () => {
         const key = event.key.toLowerCase();
 
         switch (key) {
-          case "k": // Ctrl+K for new note
+          case "k":{
             event.preventDefault();
             event.stopPropagation();
             handleCreateNote();
             toast.success("New note created");
             break;
-          case "s":
+          }
+          case "s":{
             event.preventDefault();
             event.stopPropagation();
             const currentNote = notes.find((note) => note.id === activeNoteId);
@@ -67,7 +68,8 @@ const Index = () => {
               toast.success("Notes are saved automatically");
             }
             break;
-          case "d":
+          }
+          case "d":{
             event.preventDefault();
             event.stopPropagation();
             if (activeNoteId) {
@@ -75,21 +77,25 @@ const Index = () => {
               toast.success("Note deleted");
             }
             break;
-          case "f":
+          }
+          case "f":{
             event.preventDefault();
             event.stopPropagation();
             window.dispatchEvent(new CustomEvent("focus-search"));
             break;
-          case "arrowup":
+          }
+          case "arrowup":{
             event.preventDefault();
             event.stopPropagation();
             navigateNotes("up");
             break;
-          case "arrowdown":
+          }
+          case "arrowdown":{
             event.preventDefault();
             event.stopPropagation();
             navigateNotes("down");
             break;
+          }
         }
       }
     };
@@ -116,7 +122,7 @@ const Index = () => {
           <main className="flex-1 overflow-hidden relative">
             {/* Keyboard Shortcuts Helper */}
             <div
-              className="absolute bottom-4 right-4 bg-card border border-border rounded-lg p-3 shadow-lg text-xs z-10"
+              className=" hidden md:block absolute bottom-4 right-4 bg-card border border-border rounded-lg p-3 shadow-lg text-xs z-10"
               role="region"
               aria-labelledby="shortcuts-heading"
             >
@@ -125,26 +131,26 @@ const Index = () => {
                 <div className="flex items-center justify-between gap-4">
                   <span>New note</span>
                   <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">
-                    Ctrl+K
+                    Cmd/Ctrl+K
                   </kbd>
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <span>Save note</span>
                   <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">
-                    Ctrl+S
+                    Cmd/Ctrl+S
                   </kbd>
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <span>Delete note</span>
                   <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">
-                    Ctrl+D
+                    Cmd/Ctrl+D
                   </kbd>
                 </div>
 
                 <div className="flex items-center justify-between gap-4">
                   <span>Navigate</span>
                   <kbd className="px-2 py-0.5 bg-muted rounded border border-border font-mono">
-                    Ctrl+↑↓
+                    Cmd/Ctrl+↑↓
                   </kbd>
                 </div>
               </div>
