@@ -230,7 +230,6 @@ const Index = () => {
               onCreateNote={handleCreateNote}
               onDuplicateNote={handleDuplicateNote}
               onDelete={handleDeleteNote}
-              onDelete={handleDeleteNote} // ADD THIS LINE TOO
             />
           )}
         </main>
