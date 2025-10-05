@@ -31,7 +31,7 @@ const Index = () => {
   const activeNote = notes.find((note) => note.id === activeNoteId);
 
   return (
-    <div className="flex h-screen  overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden bg-background">
       {/* Desktop Layout */}
       {!isMobile && (
         <>
@@ -40,6 +40,7 @@ const Index = () => {
             activeNoteId={activeNoteId}
             onSelectNote={setActiveNoteId}
             onCreateNote={handleCreateNote}
+            onDelete={handleDeleteNote} // ADD THIS LINE
           />
           <main className="flex-1 overflow-hidden">
             {activeNote ? (
@@ -84,6 +85,7 @@ const Index = () => {
               activeNoteId={activeNoteId}
               onSelectNote={setActiveNoteId}
               onCreateNote={handleCreateNote}
+              onDelete={handleDeleteNote} // ADD THIS LINE TOO
             />
           )}
         </main>

@@ -13,6 +13,7 @@ interface NotesSidebarProps {
   activeNoteId: string | null;
   onSelectNote: (id: string) => void;
   onCreateNote: () => void;
+  onDelete: (id: string) => void;
 }
 
 export function NotesSidebar({
@@ -20,6 +21,7 @@ export function NotesSidebar({
   activeNoteId,
   onSelectNote,
   onCreateNote,
+  onDelete,
 }: NotesSidebarProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -35,7 +37,7 @@ export function NotesSidebar({
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-foreground">Notes</h1>
           <div className="flex items-center gap-2">
-            <ThemeToggle />
+            <ThemeToggle/>
             <Button
               onClick={() => {
                 if (!activeNoteId) return;
@@ -71,10 +73,11 @@ export function NotesSidebar({
               size="icon"
               variant="outline"
               className="hover:bg-secondary"
+              title="Export as PDF"
             >
               <FileDown className="h-5 w-5" />
             </Button>
-            <Button onClick={onCreateNote} size="icon" variant="default">
+            <Button onClick={onCreateNote} size="icon" variant="default" title="Create Note">
               <PlusCircle className="h-5 w-5" />
             </Button>
           </div>
@@ -102,6 +105,7 @@ export function NotesSidebar({
                 note={note}
                 isActive={note.id === activeNoteId}
                 onClick={() => onSelectNote(note.id)}
+                onDelete={() => onDelete(note.id)}
               />
             ))
           )}
