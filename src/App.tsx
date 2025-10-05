@@ -7,9 +7,11 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { CurrentUserProvider } from "@/context/CurrentUserContext";
 
+
 const queryClient = new QueryClient();
 
-const App = () => (
+const App = () => {
+  return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -24,6 +26,7 @@ const App = () => (
       </CurrentUserProvider>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  )
+};
 
 export default App;
