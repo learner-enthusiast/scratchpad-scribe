@@ -146,7 +146,6 @@ const Index = () => {
             onCreateNote={handleCreateNote}
             onDuplicateNote={handleDuplicateNote}
             onDelete={handleDeleteNote}
-            onDelete={handleDeleteNote} // ADD THIS LINE
           />
           <main className="flex-1 overflow-hidden relative">
             {/* Keyboard Shortcuts Helper */}
