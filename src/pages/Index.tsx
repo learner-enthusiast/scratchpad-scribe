@@ -1,3 +1,8 @@
+import { useState, useEffect, useCallback } from 'react';
+import { useNotes } from '@/hooks/useNotes';
+import { NotesSidebar } from '@/components/NotesSidebar';
+import { NoteEditor } from '@/components/NoteEditor';
+import { FileText, ArrowLeft } from 'lucide-react';
 import { useState, useEffect } from "react";
 import { useNotes } from "@/hooks/useNotes";
 import { NotesSidebar } from "@/components/NotesSidebar";
@@ -6,7 +11,7 @@ import { FileText, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 
 const Index = () => {
-  const { notes, createNote, updateNote, deleteNote } = useNotes();
+  const { notes, createNote, updateNote, deleteNote, duplicateNote } = useNotes();
   const [activeNoteId, setActiveNoteId] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -29,6 +34,27 @@ const Index = () => {
     }
   };
 
+  const handleDuplicateNote = useCallback((id: string) => {
+    const newId = duplicateNote(id);
+    if (newId) setActiveNoteId(newId);
+  }, [duplicateNote]);
+
+  // Keyboard shortcut: Ctrl/Cmd + D to duplicate active note
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+      const metaKey = isMac ? e.metaKey : e.ctrlKey;
+      if (metaKey && e.key.toLowerCase() === 'd') {
+        e.preventDefault();
+        if (activeNoteId) {
+          handleDuplicateNote(activeNoteId);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [activeNoteId, notes, handleDuplicateNote]);
   const navigateNotes = (direction: "up" | "down") => {
     if (notes.length === 0) return;
 
@@ -118,7 +144,8 @@ const Index = () => {
             activeNoteId={activeNoteId}
             onSelectNote={setActiveNoteId}
             onCreateNote={handleCreateNote}
-            onDelete={handleDeleteNote} // ADD THIS LINE
+            onDuplicateNote={handleDuplicateNote}
+            onDelete={handleDeleteNote}
           />
           <main className="flex-1 overflow-hidden relative">
             {/* Keyboard Shortcuts Helper */}
@@ -200,7 +227,8 @@ const Index = () => {
               activeNoteId={activeNoteId}
               onSelectNote={setActiveNoteId}
               onCreateNote={handleCreateNote}
-              onDelete={handleDeleteNote} // ADD THIS LINE TOO
+              onDuplicateNote={handleDuplicateNote}
+              onDelete={handleDeleteNote}
             />
           )}
         </main>
