@@ -27,7 +27,6 @@ export function NotesSidebar({
   onSelectNote,
   onCreateNote,
   onDuplicateNote,
-  onDeleteNote,
   onDelete,
 }: NotesSidebarProps) {
   const [searchQuery, setSearchQuery] = useState("");
