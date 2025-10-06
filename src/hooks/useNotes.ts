@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Note } from '@/types/note';
-import { generateUUID } from '@/lib/uuid';
+import { useState, useEffect } from "react";
+import { Note } from "@/types/note";
 
-const STORAGE_KEY = 'notes-app-data';
+const STORAGE_KEY = "notes-app-data";
 
 export function useNotes() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -13,14 +12,16 @@ export function useNotes() {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        const notesWithDates = parsed.map((note: Note & { createdAt: string; updatedAt: string }) => ({
-          ...note,
-          createdAt: new Date(note.createdAt),
-          updatedAt: new Date(note.updatedAt),
-        }));
+        const notesWithDates = parsed.map(
+          (note: Note & { createdAt: string; updatedAt: string }) => ({
+            ...note,
+            createdAt: new Date(note.createdAt),
+            updatedAt: new Date(note.updatedAt),
+          })
+        );
         setNotes(notesWithDates);
       } catch (error) {
-        console.error('Failed to parse notes from localStorage:', error);
+        console.error("Failed to parse notes from localStorage:", error);
       }
     }
   }, []);
@@ -31,8 +32,8 @@ export function useNotes() {
   }, [notes]);
 
   const getUniqueTitle = (baseTitle: string, excludeId?: string) => {
-    const escapedBase = baseTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp('^' + escapedBase + '(?: \\(([0-9]+)\\))?$');
+    const escapedBase = baseTitle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp("^" + escapedBase + "(?: \\(([0-9]+)\\))?$");
     let max = 0;
     let hasExactMatch = false;
     notes.forEach((n) => {
@@ -54,11 +55,11 @@ export function useNotes() {
   };
 
   const createNote = () => {
-    const title = getUniqueTitle('Untitled Note');
+    const title = getUniqueTitle("Untitled Note");
     const newNote: Note = {
-      id: generateUUID(),
+      id: crypto.randomUUID(),
       title,
-      content: '',
+      content: "",
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -66,7 +67,10 @@ export function useNotes() {
     return newNote.id;
   };
 
-  const updateNote = (id: string, updates: Partial<Pick<Note, 'title' | 'content'>>) => {
+  const updateNote = (
+    id: string,
+    updates: Partial<Pick<Note, "title" | "content">>
+  ) => {
     setNotes((prev) =>
       prev.map((note) => {
         if (note.id === id) {
@@ -87,7 +91,7 @@ export function useNotes() {
   };
 
   const duplicateNote = (id: string) => {
-    const newId = generateUUID();
+    const newId = crypto.randomUUID();
 
     setNotes((prev) => {
       const idx = prev.findIndex((n) => n.id === id);
@@ -96,7 +100,7 @@ export function useNotes() {
       const original = prev[idx];
 
       // Determine base title (remove any existing numbering)
-      const baseTitle = original.title.replace(/\s*\(\d+\)$/, '');
+      const baseTitle = original.title.replace(/\s*\(\d+\)$/, "");
 
       // Get unique title for the duplicate
       const newTitle = getUniqueTitle(baseTitle);
@@ -111,7 +115,11 @@ export function useNotes() {
       };
 
       // Insert duplicated note immediately after the original
-      const next = [...prev.slice(0, idx + 1), duplicated, ...prev.slice(idx + 1)];
+      const next = [
+        ...prev.slice(0, idx + 1),
+        duplicated,
+        ...prev.slice(idx + 1),
+      ];
 
       return next;
     });
