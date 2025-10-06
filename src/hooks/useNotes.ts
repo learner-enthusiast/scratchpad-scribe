@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Note } from '@/types/note';
+import { generateUUID } from '@/lib/uuid';
 
 const STORAGE_KEY = 'notes-app-data';
 
@@ -55,7 +56,7 @@ export function useNotes() {
   const createNote = () => {
     const title = getUniqueTitle('Untitled Note');
     const newNote: Note = {
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       title,
       content: '',
       createdAt: new Date(),
@@ -86,7 +87,7 @@ export function useNotes() {
   };
 
   const duplicateNote = (id: string) => {
-    const newId = crypto.randomUUID();
+    const newId = generateUUID();
 
     setNotes((prev) => {
       const idx = prev.findIndex((n) => n.id === id);
