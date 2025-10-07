@@ -196,7 +196,6 @@ export function NotesSidebar({
       </div>
 
       {/* Auth modal */}
-      {/* Auth modal */}
       <AuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
