@@ -75,9 +75,9 @@ Follow the steps below to contribute:
 
 1. **Fork** the repository.  
 2. **Clone** your forked repository using the command:  
-   `git clone https://github.com/your-username/repo-name.git`
+   `git clone https://github.com/your-username/scratchpad-scribe.git`
 3. **Navigate** into the project directory:  
-   `cd repo-name`
+   `cd scratchpad-scribe`
 4. **Create a new branch** for your feature or fix:  
    `git checkout -b feature/your-feature-name`
 5. **Make your changes** — improve docs, fix bugs, or add new features.  
