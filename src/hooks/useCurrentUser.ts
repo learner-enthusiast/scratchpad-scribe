@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
+import { getToken } from "@/utils/auth"; 
+import { handleAuthResponse } from "@/utils/authHelpers";
 
 type User = {
   id: string;
@@ -8,15 +10,11 @@ type User = {
 
 const TOKEN_KEY = "notes_app_token";
 const USER_KEY = "notes_app_user";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export function useCurrentUser() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const getToken = () => {
-    if (typeof window === "undefined") return null;
-    return localStorage.getItem(TOKEN_KEY);
-  };
 
   // authFetch helper for other hooks/components to call backend with token
   const authFetch = useCallback(
@@ -45,7 +43,7 @@ export function useCurrentUser() {
       }
 
       try {
-        const res = await fetch("http://localhost:5000/api/auth/me", {
+        const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -77,7 +75,7 @@ export function useCurrentUser() {
   const login = async (email: string, password: string) => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -89,18 +87,7 @@ export function useCurrentUser() {
       }
 
       const data = await res.json();
-      const token = data.token;
-      const userData = data.user;
-
-      if (token) {
-        localStorage.setItem(TOKEN_KEY, token);
-        localStorage.setItem(USER_KEY, JSON.stringify(userData));
-        setUser(userData);
-      } else {
-        throw new Error("No token returned from server");
-      }
-
-      return { success: true, user: userData };
+      return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
     } catch (error: any) {
       console.error("Login error:", error);
       return { success: false, message: error.message || "Login failed" };
@@ -112,7 +99,7 @@ export function useCurrentUser() {
   const signup = async (username: string, email: string, password: string) => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
@@ -124,18 +111,7 @@ export function useCurrentUser() {
       }
 
       const data = await res.json();
-      const token = data.token;
-      const userData = data.user;
-
-      if (token) {
-        localStorage.setItem(TOKEN_KEY, token);
-        localStorage.setItem(USER_KEY, JSON.stringify(userData));
-        setUser(userData);
-      } else {
-        throw new Error("No token returned from server");
-      }
-
-      return { success: true, user: userData };
+       return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
     } catch (error: any) {
       console.error("Signup error:", error);
       return { success: false, message: error.message || "Signup failed" };
