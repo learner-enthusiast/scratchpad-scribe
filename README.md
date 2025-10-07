@@ -55,7 +55,7 @@ Follow these steps to get the project running locally:
 git clone https://github.com/your-username/scratchpad-scribe.git
 
 # Step 2: Navigate to the project directory
-cd <YOUR_PROJECT_NAME>
+cd scratchpad-scribe
 
 # Step 3: Install dependencies
 npm install
