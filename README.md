@@ -79,31 +79,31 @@ Follow the steps below to contribute:
    ```bash
    git clone https://github.com/your-username/scratchpad-scribe.git
    ```
-4. **Navigate** into the project directory:
+3. **Navigate** into the project directory:
 
    ```bash  
    cd scratchpad-scribe
    ```
-6. **Create a new branch** for your feature or fix:
+4. **Create a new branch** for your feature or fix:
      
    ```bash
    git checkout -b feature/your-feature-name
    ```
-8. **Make your changes** — improve docs, fix bugs, or add new features.  
-9. **Stage and commit** your changes:
+5. **Make your changes** — improve docs, fix bugs, or add new features.  
+6. **Stage and commit** your changes:
 
     ```bash 
    git add .
    git commit -m "Added a new feature: your-feature-name"
    ```
     
-11. **Push** your branch to your forked repository:
+7. **Push** your branch to your forked repository:
 
    ```bash
    git push origin feature/your-feature-name
    ```
 
-13. **Open a Pull Request (PR)** to the main repository:  
+8. **Open a Pull Request (PR)** to the main repository:  
    - Go to the original repo on GitHub.  
    - Click **“Compare & Pull Request.”**  
    - Add a clear title and description for your PR.  
