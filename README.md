@@ -62,6 +62,7 @@ npm install
 
 # Step 4: Start the development server
 npm run dev
+```
 
 ## 💡 How to Contribute
 
@@ -73,19 +74,36 @@ Follow the steps below to contribute:
 ### Steps to Contribute
 
 1. **Fork** the repository.  
-2. **Clone** your forked repository using the command:  
-   `git clone https://github.com/your-username/scratchpad-scribe.git`
-3. **Navigate** into the project directory:  
-   `cd scratchpad-scribe`
-4. **Create a new branch** for your feature or fix:  
-   `git checkout -b feature/your-feature-name`
-5. **Make your changes** — improve docs, fix bugs, or add new features.  
-6. **Stage and commit** your changes:  
-   `git add .`  
-   `git commit -m "Added a new feature: your-feature-name"`
-7. **Push** your branch to your forked repository:  
-   `git push origin feature/your-feature-name`
-8. **Open a Pull Request (PR)** to the main repository:  
+2. **Clone** your forked repository using the command:
+ 
+   ```bash
+   git clone https://github.com/your-username/scratchpad-scribe.git
+   ```
+4. **Navigate** into the project directory:
+
+   ```bash  
+   cd scratchpad-scribe
+   ```
+6. **Create a new branch** for your feature or fix:
+     
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+8. **Make your changes** — improve docs, fix bugs, or add new features.  
+9. **Stage and commit** your changes:
+
+    ```bash 
+   git add .
+   git commit -m "Added a new feature: your-feature-name"
+   ```
+    
+11. **Push** your branch to your forked repository:
+
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+13. **Open a Pull Request (PR)** to the main repository:  
    - Go to the original repo on GitHub.  
    - Click **“Compare & Pull Request.”**  
    - Add a clear title and description for your PR.  
