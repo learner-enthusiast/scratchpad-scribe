@@ -63,7 +63,6 @@ npm install
 # Step 4: Start the development server
 npm run dev
 
-```
 ## 💡 How to Contribute
 
 We ❤️ contributions from the community!  
