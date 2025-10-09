@@ -52,7 +52,7 @@ Follow these steps to get the project running locally:
 
 ```bash
 # Step 1: Clone the repository
-git clone https://github.com/your-username/scratchpad-scribe.git
+git clone https://github.com/DhanushNehru/scratchpad-scribe.git
 
 # Step 2: Navigate to the project directory
 cd scratchpad-scribe
