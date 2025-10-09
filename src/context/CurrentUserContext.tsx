@@ -73,7 +73,7 @@ export const CurrentUserProvider: React.FC<{ children: React.ReactNode }> = ({ c
                 throw new Error(err.message || "Signup failed");
             }
             const data = await res.json();
-              return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
+            return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
         } catch (err: any) {
             return { success: false, message: err.message || "Signup failed" };
         } finally {
