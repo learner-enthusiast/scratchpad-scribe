@@ -111,7 +111,7 @@ export function useCurrentUser() {
       }
 
       const data = await res.json();
-       return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
+      return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
     } catch (error: any) {
       console.error("Signup error:", error);
       return { success: false, message: error.message || "Signup failed" };
