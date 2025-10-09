@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
-import { getToken } from "@/utils/auth"; 
+import { getToken } from "@/utils/auth";
 import { handleAuthResponse } from "@/utils/authHelpers";
 
 type User = {
@@ -52,9 +52,13 @@ export const CurrentUserProvider: React.FC<{ children: React.ReactNode }> = ({ c
                 throw new Error(err.message || "Login failed");
             }
             const data = await res.json();
-             return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
-        } catch (err: any) {
-            return { success: false, message: err.message || "Login failed" };
+            return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                return { success: false, message: err.message };
+            } else {
+                return { success: false, message: "Login failed" };
+            }
         } finally {
             setLoading(false);
         }
@@ -74,8 +78,12 @@ export const CurrentUserProvider: React.FC<{ children: React.ReactNode }> = ({ c
             }
             const data = await res.json();
             return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
-        } catch (err: any) {
-            return { success: false, message: err.message || "Signup failed" };
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                return { success: false, message: err.message };
+            } else {
+                return { success: false, message: "Signup failed" };
+            }
         } finally {
             setLoading(false);
         }

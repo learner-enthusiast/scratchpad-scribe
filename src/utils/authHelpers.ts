@@ -1,13 +1,23 @@
-// src/utils/authHelpers.ts
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface AuthResponse {
+  token: string;
+  user: User;
+}
+
+type SetUser = (user: User) => void;
 
 export const handleAuthResponse = (
-  data: any,
-  setUser: (user: any) => void,
+  data: AuthResponse,
+  setUser: SetUser,
   TOKEN_KEY: string,
   USER_KEY: string
 ) => {
-  const token = data.token;
-  const userData = data.user;
+  const { token, user: userData } = data;
 
   if (!token) {
     throw new Error("No token returned from server");

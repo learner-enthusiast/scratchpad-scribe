@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { getToken } from "@/utils/auth"; 
+import { getToken } from "@/utils/auth";
 import { handleAuthResponse } from "@/utils/authHelpers";
 
 type User = {
@@ -88,9 +88,14 @@ export function useCurrentUser() {
 
       const data = await res.json();
       return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
-    } catch (error: any) {
-      console.error("Login error:", error);
-      return { success: false, message: error.message || "Login failed" };
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Login error:", error);
+        return { success: false, message: error.message };
+      } else {
+        console.error("Login error:", error);
+        return { success: false, message: "Login failed" };
+      }
     } finally {
       setLoading(false);
     }
@@ -112,9 +117,14 @@ export function useCurrentUser() {
 
       const data = await res.json();
       return handleAuthResponse(data, setUser, TOKEN_KEY, USER_KEY);
-    } catch (error: any) {
-      console.error("Signup error:", error);
-      return { success: false, message: error.message || "Signup failed" };
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Signup error:", error);
+        return { success: false, message: error.message };
+      } else {
+        console.error("Signup error:", error);
+        return { success: false, message: "Signup failed" };
+      }
     } finally {
       setLoading(false);
     }
@@ -133,7 +143,7 @@ export function useCurrentUser() {
     signup,
     logout,
     isLoggedIn: !!user,
-    authFetch, 
+    authFetch,
     token: getToken(),
   };
 }
